@@ -1,0 +1,66 @@
+0.001a of Documentation ig
+
+Okay, so I should make some config in for example
+
+/etc/DIOFS/fs.conf
+
+with something it like:
+
+**[Encryption key path]
+/key/user/secret.key
+
+[All distributed dirs]
+/opt
+/home
+/boot
+
+[mode]
+mode=slave
+
+[master node]
+master=192.168.0.1
+backup=172.16.0.2
+
+[port]
+port=29092
+**
+like, for example as you see here (or up there)
+
+Aaaaand of course I would need to make config in grub, make initramfs and some more….
+
+For protocol I would suggest SFTP or…custom? IDK.
+Settled on protocol gRPC, whatever.
+
+OK, so we have our repo now.
+https://github.com/IlDIOlI/EnDFS
+
+SO we need to do other things. For example to do some metadata naming and setting its purpose..?
+
+Metadata:
+
+FILE Related
+Size, Owner, Date of creation, Name, Directory, Access for this system (R,W,X), Modification time
+
+
+
+ACCESS Related
+Permitted Users, Last Accessed by user, ?Access history? IDK
+
+
+FRAGS Related
+Fragmentation in the file(count of the frags), Max size of the fragment, Nodes that have that fragment in storage, checksum, ?Encryption key? 
+
+REPLICATION Related
+Replicas of the fragment, Location of the replicas, version of the file for updates.
+
+About fault handling,
+
+Suggested opinion is that it should include replication, detecting and checking healthy nodes, alerting, how many replicas there should be and so on, and of course automatic failover or just a big red alert.
+
+For more detailed access control, I think it just has to be in the main .config file, just as some parameter to whom it should be replicated and what does need to be replicated.
+
+
+
+ENCRYPTION!!!!
+
+For encryption would be used AES 256 and OpenSSL lib. It would require another config with a key to encrypted FS. I would also like to include the decryption interaction as a password. In future versions I will maybe implement something like a security key, idk.
