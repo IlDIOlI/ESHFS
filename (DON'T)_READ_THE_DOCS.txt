@@ -64,3 +64,21 @@ For more detailed access control, I think it just has to be in the main .config 
 ENCRYPTION!!!!
 
 For encryption would be used AES 256 and OpenSSL lib. It would require another config with a key to encrypted FS. I would also like to include the decryption interaction as a password. In future versions I will maybe implement something like a security key, idk.
+
+
+High level architecture?
+
+sounds like another yapping session, but here we are. Rn listening to Shikanoko nokonoko koshi tantan, so expect brainrot maxxing later.
+
+So I thought about it and settled upon using something like this:
+
+there are Master and Slave nodes, Every one is encrypted but differently. Every node can share info with each other, but only master shares it with everyone. How? I will figure it later.
+
+Probably I will have to use eventually some kind of API to get my requests parsed in other nodes. Maybe I will have even few daemons for that. And of course some commands for requesting, updating and other? usage.
+
+Will I do some point of remote access to master files? I think no, we have SSH for that after all.
+
+The files would be sent over the network in fragments, of course they will be encrypted properly with SSL. Fragments will be already defined in Metadata, or at least i think I will do that kind of thing.
+
+And I will have to make some sort of Health servers if you would prefer.
+They will check if every node is in tact and with correct info so it won't get compromised.
